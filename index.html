@@ -1,5 +1,53 @@
 <!DOCTYPE html>
 <html lang="en">
   <head> </head>
-  <body></body>
+  <body>
+    <div id="root"></div>
+  </body>
+  <script
+    crossorigin
+    src="https://unpkg.com/react@18/umd/react.production.min.js"
+  ></script>
+  <script
+    crossorigin
+    src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"
+  ></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <script type="text/babel">
+    const root = document.querySelector("#root");
+    const Title = () => (
+      <h3 id="title" onMouseEnter={() => console.log("mouse enter")}>
+        Hello I'm a title
+      </h3> //JSX
+    );
+    /*
+    const h3 = React.createElement(
+      "h3",
+      {
+        id: "title",
+        onMouseEnter: () => console.log("mouse enter"),
+      },
+      "Hello I'm a span"
+    );
+    */
+    const Button = () => (
+      // = () => 를 넣어 줌으로서 함수로 만들어준다 function하고 괄호를 연 다음 return 하는 걸아 같은 의미이다.
+      <button
+        style={{
+          backgroundColor: "tomato",
+        }}
+        onClick={() => console.log("I'm clicked")}
+      >
+        Click me
+      </button>
+    );
+    const Container = () => (
+      //직접 생성한 컴포넌트의 첫글자는 대문자여야한다
+      <div>
+        <Title />
+        <Button />
+      </div>
+    );
+    ReactDOM.render(<Container />, root);
+  </script>
 </html>
