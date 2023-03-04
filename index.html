@@ -32,19 +32,42 @@
 
     const root = document.querySelector("#root");
 
-    function App() {
+    /* function App() {
       //const App = () => (
       // = () => 를 넣어 줌으로서 함수로 만들어준다 function하고 괄호를 연 다음 return 하는 걸아 같은 의미이다.
       //직접 생성한 컴포넌트의 첫글자는 대문자여야한다
       const [counter, setCounter] = React.useState(0); //useState 는 배열을 준다 [ 우리가 담으려는 data 값, 이 data 값을 바꿀때 사용할 function ]
       const onclick = () => {
         //setCounter(counter + 1); // 함수를 이용해서 데이터를 바꿨을때 데이터 값이 바뀌고 컴포넌트도 동시에 리렌더링된다
-        setCounter((current) => current + 1);
+        setCounter((current) => current + 1); // 현재의 state를 가지고 새로운 값을 계산한다, 위랑 똑같은 함수 하지만 더 안전하다
       };
       return (
         <div>
           <h3>Total Click: {counter}</h3>
           <button onClick={onclick}>Click me</button>
+        </div>
+      );
+    } */
+
+    function App() {
+      const [minutes, setMinutes] = React.useState(0); //useState(default값)
+      const onChange = (event) => {
+        setMinutes(event.target.value);
+      };
+      return (
+        <div>
+          <h1 className="hi">Super Converter</h1>
+          <label htmlFor="minutes">Minutes</label>
+          <input
+            value={minutes}
+            id="minutes"
+            type="number"
+            placeholder="Minutes"
+            onChange={onChange}
+          />
+          <h4>You want to convert {minutes} </h4>
+          <label htmlFor="hours">Hours</label>
+          <input id="hours" type="number" placeholder="Hours" />
         </div>
       );
     }
