@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head> </head>
+    <body>
+        <div id="root"></div>
+    </body>
+    <script
+        crossorigin
+        src="https://unpkg.com/react@18/umd/react.production.min.js"
+    ></script>
+    <script
+        crossorigin
+        src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"
+    ></script>
+    <script src="https://unpkg.com/prop-types@15.7.2/prop-types.js"></script>
+    <!--props type-->
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script type="text/babel">
+        function Btn({ text, changeValue, fontSize }) {
+            //props 는 object shortcut 으로 Btn(props) 대신 Btn({text})라고 해도 된다
+            return (
+                <button
+                    onClick={changeValue}
+                    style={{
+                        backgroundColor: "tomato",
+                        color: "white",
+                        padding: "10px 20px",
+                        border: 0,
+                        borderRadius: 10,
+                        fontSize, //props로 받아올 경우 props.fonsSize라고 써야한다
+                    }}
+                >
+                    {text}
+                </button>
+            );
+        }
+        const MemorizedBtn = React.memo(Btn); //Props Memo props가 변경되지 않는 건 re-render을 하지 않게 해준다
+        MemorizedBtn.propTypes = {
+            text: PropTypes.string.isRequired, // text prop이 string만 받아낼 것 그리고 필수정이야한다(isRequired)
+            fontSize: PropTypes.number, //MemorizedBtn의 fontSize prop 이 number만 받아낼 것
+        };
+        function App() {
+            const [value, setValue] = React.useState("Save Changes");
+            const changeValue = () => setValue("Revert Changes");
+            return (
+                // <Btn text="Save Changes" /> 는 Btn({banan:"Save Changes"}) 와 같다
+                //  <Btn /> 과 같은 커스텀 컨포넌트에 onClick을 넣는거는 eventlistener 이 아닌 prop 이다
+                <div>
+                    <MemorizedBtn
+                        text={value}
+                        changeValue={changeValue}
+                        fontSize={18}
+                    />
+                    <MemorizedBtn text="Continue" /> {/**/}
+                </div>
+            );
+        }
+        const root = document.querySelector("#root");
+        ReactDOM.render(<App />, root); // App 컴포넌트를 root div 에 담으면서 render한다
+    </script>
+</html>
